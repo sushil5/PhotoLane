@@ -1,9 +1,10 @@
-import React, {useEffect, useState} from 'react';
-import {Text, View, StyleSheet, FlatList} from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
-import {Container} from '../../components';
+import React, { useEffect, useState } from 'react';
+import { Text, View, StyleSheet, FlatList } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { Container } from '../../components';
 import UserCard from '../../components/UserCard';
-import {User} from '../../models';
+import { User } from '../../models';
+import api from '../../services';
 
 const Photos: React.FC = () => {
   const [users, setUsers] = useState([]);
@@ -12,18 +13,19 @@ const Photos: React.FC = () => {
     getUsers();
   }, []);
 
-  const getUsers = () => {
-    fetch('https://jsonplaceholder.typicode.com/users')
-      .then(response => response.json())
-      .then(users => {
-        setUsers(users);
-      })
-      .catch(error => {
-        console.error(error);
-      });
+  const getUsers = async () => {
+    const data = await api.users.ge
+    // fetch('https://jsonplaceholder.typicode.com/users')
+    //   .then(response => response.json())
+    //   .then(users => {
+    //     setUsers(users);
+    //   })
+    //   .catch(error => {
+    //     console.error(error);
+    //   });
   };
 
-  const renderItem = ({item, index}: {item: User; index: number}) => {
+  const renderItem = ({ item, index }: { item: User; index: number }) => {
     return <UserCard user={item} />;
   };
 
